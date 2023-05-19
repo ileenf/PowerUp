@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A1E85B142A0360ED006C5719 /* PowerUpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E85B132A0360ED006C5719 /* PowerUpApp.swift */; };
-		A1E85B162A0360ED006C5719 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E85B152A0360ED006C5719 /* ContentView.swift */; };
+		A1E85B162A0360ED006C5719 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E85B152A0360ED006C5719 /* ProfileView.swift */; };
 		A1E85B182A0360F0006C5719 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E85B172A0360F0006C5719 /* Assets.xcassets */; };
 		A1E85B1B2A0360F0006C5719 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E85B1A2A0360F0006C5719 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		A1E85B102A0360ED006C5719 /* PowerUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E85B132A0360ED006C5719 /* PowerUpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpApp.swift; sourceTree = "<group>"; };
-		A1E85B152A0360ED006C5719 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1E85B152A0360ED006C5719 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A1E85B172A0360F0006C5719 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1E85B1A2A0360F0006C5719 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A1E85B1C2A0360F0006C5719 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 			children = (
 				C04C04582A1757A300966C79 /* PowerUp.entitlements */,
 				A1E85B132A0360ED006C5719 /* PowerUpApp.swift */,
-				A1E85B152A0360ED006C5719 /* ContentView.swift */,
+				A1E85B152A0360ED006C5719 /* ProfileView.swift */,
 				A1E85B172A0360F0006C5719 /* Assets.xcassets */,
 				A1E85B1C2A0360F0006C5719 /* Info.plist */,
 				A1E85B192A0360F0006C5719 /* Preview Content */,
@@ -141,7 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1E85B162A0360ED006C5719 /* ContentView.swift in Sources */,
+				A1E85B162A0360ED006C5719 /* ProfileView.swift in Sources */,
 				A1E85B142A0360ED006C5719 /* PowerUpApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
