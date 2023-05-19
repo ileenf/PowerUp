@@ -9,9 +9,9 @@ import SwiftUI
 import HealthKit
 
 struct HealthStatsView: View {
-    @State private var caloriesBurned: Int = 332
-    @State private var weight: Int = 23
-    @State private var heartRate: Int = 42
+    @State var caloriesBurned: Int = 0
+    @State var weight: Int = 0
+    @State var heartRate: Int = 0
 
     var body: some View {
         VStack {
@@ -22,7 +22,7 @@ struct HealthStatsView: View {
             Text("Heart Rate (BPM): \(heartRate)")
                 .padding()
             
-            NavigationLink(destination: ProfileView()) {
+            NavigationLink(destination: ProfileView(calories : caloriesBurned)) {
                 Text("Continue")
                     .font(.headline)
                     .foregroundColor(.white)

@@ -10,6 +10,7 @@ struct ProfileView: View {
     @State private var height: Double = 0.0
     @State private var avgSleepDuration: Double = 0.0
 
+    var calories : Int
     var body: some View {
         VStack {
             TextField("First Name", text: $firstName)
@@ -39,10 +40,8 @@ struct ProfileView: View {
                 .padding()
 
 
-            Button(action: {
-                saveUserData()
-            }) {
-                Text("Save Data")
+            NavigationLink(destination: ResultsView(calories: calories)) {
+                Text("Continue")
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
