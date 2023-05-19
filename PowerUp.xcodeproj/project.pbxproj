@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,7 @@
 		A1E85B172A0360F0006C5719 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1E85B1A2A0360F0006C5719 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A1E85B1C2A0360F0006C5719 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C04C04582A1757A300966C79 /* PowerUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PowerUp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +53,7 @@
 		A1E85B122A0360ED006C5719 /* PowerUp */ = {
 			isa = PBXGroup;
 			children = (
+				C04C04582A1757A300966C79 /* PowerUp.entitlements */,
 				A1E85B132A0360ED006C5719 /* PowerUpApp.swift */,
 				A1E85B152A0360ED006C5719 /* ContentView.swift */,
 				A1E85B172A0360F0006C5719 /* Assets.xcassets */,
@@ -95,8 +97,9 @@
 		A1E85B082A0360ED006C5719 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					A1E85B0F2A0360ED006C5719 = {
 						CreatedOnToolsVersion = 12.4;
@@ -267,6 +270,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PowerUp/PowerUp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PowerUp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
@@ -288,6 +292,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PowerUp/PowerUp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PowerUp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;

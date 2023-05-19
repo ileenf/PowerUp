@@ -33,6 +33,15 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>For health data</string>
+	<key>HKCharacteristicTypeIdentifierBiologicalSex</key>
+	<string></string>
+	<key>Health data</key>
+	<dict>
+		<key>HKCharacteristicTypeIdentifierBiologicalSex</key>
+		<string>gender data</string>
+	</dict>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
