@@ -15,7 +15,7 @@ struct WelcomeView: View {
                     .font(.title)
                     .padding()
 
-                NavigationLink(destination: ProfileView()) {
+                NavigationLink(destination: HealthStatsView()) {
                     Text("Continue")
                         .font(.headline)
                         .foregroundColor(.white)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A15C93DE2A17752F004CBD37 /* HealthStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C93DD2A17752F004CBD37 /* HealthStatsView.swift */; };
 		A16C6DBD2A17707000974130 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C6DBC2A17707000974130 /* WelcomeView.swift */; };
 		A1E85B142A0360ED006C5719 /* PowerUpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E85B132A0360ED006C5719 /* PowerUpApp.swift */; };
 		A1E85B162A0360ED006C5719 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E85B152A0360ED006C5719 /* ProfileView.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A15C93DD2A17752F004CBD37 /* HealthStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStatsView.swift; sourceTree = "<group>"; };
 		A16C6DBC2A17707000974130 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A1E85B102A0360ED006C5719 /* PowerUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E85B132A0360ED006C5719 /* PowerUpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpApp.swift; sourceTree = "<group>"; };
@@ -36,6 +38,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A15C93E02A177539004CBD37 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A1E85B152A0360ED006C5719 /* ProfileView.swift */,
+				A16C6DBC2A17707000974130 /* WelcomeView.swift */,
+				A15C93DD2A17752F004CBD37 /* HealthStatsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A1E85B072A0360ED006C5719 = {
 			isa = PBXGroup;
 			children = (
@@ -57,11 +69,10 @@
 			children = (
 				C04C04582A1757A300966C79 /* PowerUp.entitlements */,
 				A1E85B132A0360ED006C5719 /* PowerUpApp.swift */,
-				A1E85B152A0360ED006C5719 /* ProfileView.swift */,
 				A1E85B172A0360F0006C5719 /* Assets.xcassets */,
 				A1E85B1C2A0360F0006C5719 /* Info.plist */,
 				A1E85B192A0360F0006C5719 /* Preview Content */,
-				A16C6DBC2A17707000974130 /* WelcomeView.swift */,
+				A15C93E02A177539004CBD37 /* Views */,
 			);
 			path = PowerUp;
 			sourceTree = "<group>";
@@ -144,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A15C93DE2A17752F004CBD37 /* HealthStatsView.swift in Sources */,
 				A1E85B162A0360ED006C5719 /* ProfileView.swift in Sources */,
 				A16C6DBD2A17707000974130 /* WelcomeView.swift in Sources */,
 				A1E85B142A0360ED006C5719 /* PowerUpApp.swift in Sources */,
