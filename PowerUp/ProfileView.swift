@@ -6,6 +6,9 @@ struct ProfileView: View {
     @State private var lastName = ""
     @State private var dateOfBirth = Date()
     @State private var selectedSex: HKBiologicalSex = .notSet
+    @State private var stepCount: Int = 0
+    @State private var height: Double = 0.0
+    @State private var avgSleepDuration: Double = 0.0
 
     var body: some View {
         VStack {
@@ -27,6 +30,14 @@ struct ProfileView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding()
+            
+            Text("Step Count: \(stepCount)")
+                .padding()
+            Text(String(format: "Height: %.2f meters", height))
+                .padding()
+            Text(String(format: "Sleep Duration: %.2f hours", avgSleepDuration))
+                .padding()
+
 
             Button(action: {
                 saveUserData()
@@ -122,6 +133,8 @@ struct ProfileView: View {
                 let stepCountQuery = HKSampleQuery(sampleType: stepCountType!, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, results, error) in
                     if let steps = results?.compactMap({ $0 as? HKQuantitySample }) {
                         let totalSteps = steps.reduce(0, { $0 + $1.quantity.doubleValue(for: HKUnit.count()) })
+                        self.stepCount = Int(totalSteps)
+                    
                         print("Step Count: \(totalSteps)")
                         // Use the step count data in your app's logic
                     } else if let error = error {
@@ -134,6 +147,7 @@ struct ProfileView: View {
                 let heightQuery = HKSampleQuery(sampleType: heightType!, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, results, error) in
                     if let heightSample = results?.last as? HKQuantitySample {
                         let heightInMeters = heightSample.quantity.doubleValue(for: HKUnit.meter())
+                        self.height = heightInMeters
                         print("Height: \(heightInMeters) meters")
                         // Use the height data in your app's logic
                     } else if let error = error {
@@ -151,9 +165,10 @@ struct ProfileView: View {
                             if let sleepSamples = results as? [HKCategorySample] {
                                 // Calculate the average sleep duration
                                 let totalSleepDuration = sleepSamples.reduce(0.0, { $0 + $1.endDate.timeIntervalSince($1.startDate) })
-                                let averageSleepDuration = totalSleepDuration / Double(sleepSamples.count)
+                                let averageSleepDurationInHours = totalSleepDuration / Double(sleepSamples.count) / 3600
+                                self.avgSleepDuration = averageSleepDurationInHours
                                 
-                                print("Average Sleep Duration: \(averageSleepDuration/3600) hours")
+                                print("Average Sleep Duration: \(averageSleepDurationInHours) hours")
                                 // Use the average sleep duration in your app's logic
                             } else if let error = error {
                                 print("Error retrieving sleep data: \(error.localizedDescription)")
