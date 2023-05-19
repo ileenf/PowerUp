@@ -11,7 +11,9 @@ import SwiftUI
 struct PowerUpApp: App {
     var body: some Scene {
         WindowGroup {
-            ProfileView()
+            WelcomeView()
         }
+        
+        
     }
 }
