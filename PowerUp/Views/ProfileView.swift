@@ -40,7 +40,7 @@ struct ProfileView: View {
                 .padding()
 
 
-            NavigationLink(destination: ResultsView(calories: calories)) {
+            NavigationLink(destination: DietView(calories: calories)) {
                 Text("Continue")
                     .font(.headline)
                     .foregroundColor(.white)
