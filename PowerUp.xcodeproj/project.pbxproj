@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9AB6C2642A2C3B5100CF7371 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB6C2632A2C3B5100CF7371 /* ExerciseView.swift */; };
+		9AB6C2662A2C429E00CF7371 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB6C2652A2C429E00CF7371 /* ResultsView.swift */; };
 		A15C93DE2A17752F004CBD37 /* HealthStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C93DD2A17752F004CBD37 /* HealthStatsView.swift */; };
 		A16C6DBD2A17707000974130 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C6DBC2A17707000974130 /* WelcomeView.swift */; };
 		A1D2D8662A1785FB000BE334 /* DietView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D2D8652A1785FB000BE334 /* DietView.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9AB6C2632A2C3B5100CF7371 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
+		9AB6C2652A2C429E00CF7371 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		A15C93DD2A17752F004CBD37 /* HealthStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStatsView.swift; sourceTree = "<group>"; };
 		A16C6DBC2A17707000974130 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A1D2D8652A1785FB000BE334 /* DietView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietView.swift; sourceTree = "<group>"; };
@@ -47,6 +51,8 @@
 				A16C6DBC2A17707000974130 /* WelcomeView.swift */,
 				A15C93DD2A17752F004CBD37 /* HealthStatsView.swift */,
 				A1D2D8652A1785FB000BE334 /* DietView.swift */,
+				9AB6C2632A2C3B5100CF7371 /* ExerciseView.swift */,
+				9AB6C2652A2C429E00CF7371 /* ResultsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,9 +164,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AB6C2642A2C3B5100CF7371 /* ExerciseView.swift in Sources */,
 				A15C93DE2A17752F004CBD37 /* HealthStatsView.swift in Sources */,
 				A1E85B162A0360ED006C5719 /* ProfileView.swift in Sources */,
 				A16C6DBD2A17707000974130 /* WelcomeView.swift in Sources */,
+				9AB6C2662A2C429E00CF7371 /* ResultsView.swift in Sources */,
 				A1D2D8662A1785FB000BE334 /* DietView.swift in Sources */,
 				A1E85B142A0360ED006C5719 /* PowerUpApp.swift in Sources */,
 			);

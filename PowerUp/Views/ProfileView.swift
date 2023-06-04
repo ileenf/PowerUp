@@ -2,10 +2,13 @@ import SwiftUI
 import HealthKit
 
 struct ProfileView: View {
+    // to store in local storage
     @State private var firstName = ""
     @State private var lastName = ""
-    @State private var dateOfBirth = Date()
     @State private var selectedSex: HKBiologicalSex = .notSet
+    @State private var age: Int = 0
+    // only for initial log in
+    @State private var dateOfBirth = Date()
     @State private var stepCount: Int = 0
     @State private var height: Double = 0.0
     @State private var avgSleepDuration: Double = 0.0
@@ -48,15 +51,31 @@ struct ProfileView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
+            .simultaneousGesture(TapGesture().onEnded(saveUserData))
             .padding()
         }
         .onAppear {
-            loadPersonalData()
+            loadPhoneData()
             getHealthData()
         }
     }
-
-    func loadPersonalData() {
+    
+    func saveUserData() {
+        // saves data on local storage
+        UserDefaults.standard.set(firstName, forKey: "firstName")
+        print("Received first name: " + firstName)
+        UserDefaults.standard.set(lastName, forKey: "lastName")
+        print("Received last name: " + lastName)
+        UserDefaults.standard.set(String(selectedSex.rawValue), forKey: "selectedSex")
+        print("Recieved gender: " + String(selectedSex.rawValue))
+        let calendar = Calendar.current
+        let now = Date()
+        let ageComponents = calendar.dateComponents([.year], from: dateOfBirth, to: now)
+        UserDefaults.standard.set(ageComponents.year, forKey: "age")
+    }
+    
+    
+    func loadPhoneData() {
         let healthStore = HKHealthStore()
         let dateOfBirthType = HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!
         let biologicalSexType = HKObjectType.characteristicType(forIdentifier: .biologicalSex)!
@@ -97,16 +116,6 @@ struct ProfileView: View {
         } catch {
             // Handle error
         }
-    }
-
-    func saveUserData() {
-        // Handle the user data as needed
-        // For example, you can pass the data to another view or perform further processing
-        print("User data saved:")
-        print("First Name: \(firstName)")
-        print("Last Name: \(lastName)")
-        print("Date of Birth: \(dateOfBirth)")
-        print("Sex: \(selectedSex.rawValue)")
     }
     
     func getHealthData() {
@@ -178,5 +187,5 @@ struct ProfileView: View {
                 print("Error requesting HealthKit authorization: \(error.localizedDescription)")
             }
         }
-}
+    }
 }
