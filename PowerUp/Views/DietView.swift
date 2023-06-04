@@ -42,6 +42,17 @@ struct DietView: View {
                 .font(.title)
             
             Spacer()
+            
+            NavigationLink(destination: ExerciseView()) {
+                Text("Continue")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            }
+            .padding()
+            
         }
         .padding()
     }
