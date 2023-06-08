@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct DietView: View {
-    var calories: Int
     @State private var eatOutFrequency = ""
     @State private var veggieFrequency = ""
     @State private var selectedOption = 0
@@ -37,9 +36,6 @@ struct DietView: View {
                     category = options[newValue]
                 }
             }
-            
-            Text("Calories: \(calories) cal")
-                .font(.title)
             
             Spacer()
             
