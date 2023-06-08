@@ -8,51 +8,73 @@ struct DietView: View {
     @State private var category = ""
     @State private var isButtonPressed = false
     
+    // color for UI
+    let baseBlack = Color(rgb: 0x1c1b1d)
+    let lightPink = Color(rgb: 0xdeaf9d)
+    let lightWhite = Color(rgb: 0xf2efed)
+
     var body: some View {
-        VStack(spacing: 20) {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("How many times per week do you eat out?")
-                    .font(.headline)
-                TextField("Example: 3", text: $eatOutFrequency)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-            }
-            
-            VStack(alignment: .leading, spacing: 10) {
-                Text("How many cups of vegetables do you eat a week?")
-                    .font(.headline)
-                TextField("Example: 2", text: $veggieFrequency)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-            }
-            
-            VStack(alignment: .leading, spacing: 10) {
-                Text("What category of food do you want to eat more of?")
-                    .font(.headline)
-                Picker("Select an option", selection: $foodCategory) {
-                    ForEach(0..<options.count) { index in
-                        Text(options[index])
+        baseBlack
+            .ignoresSafeArea() // Ignore just for the color
+            .overlay(
+                VStack(spacing: 50) {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("How many times per week do you eat out?")
+                            .font(.title)
+                            .foregroundColor(lightPink)
+                        TextField("Example: 3", text: $eatOutFrequency)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .font(.headline)
+                            .foregroundColor(baseBlack)
+                            .background(lightPink)
+                            .cornerRadius(8)
+                            .shadow(radius: 4)
                     }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .onChange(of: foodCategory) { newValue in
-                    category = options[newValue]
-                }
-            }
-            
-            Spacer()
-            
-            NavigationLink(destination: ExerciseView()) {
-                Text("Continue")
-                    .font(.headline)
-                    .foregroundColor(.white)
+                    
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("How many cups of vegetables do you eat a week?")
+                            .font(.title)
+                            .foregroundColor(lightPink)
+                        TextField("Example: 2", text: $veggieFrequency)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .font(.headline)
+                            .foregroundColor(baseBlack)
+                            .background(lightPink)
+                            .cornerRadius(8)
+                            .shadow(radius: 4)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("What category of food do you want to eat more of?")
+                            .font(.title)
+                            .foregroundColor(lightPink)
+                        Picker("Select an option", selection: $foodCategory) {
+                            ForEach(0..<options.count) { index in
+                                Text(options[index])
+                            }
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .onChange(of: foodCategory) { newValue in
+                            category = options[newValue]
+                        }
+                        .foregroundColor(lightWhite)
+                        .background(lightPink)
+                    }
+                    
+                    NavigationLink(destination: ExerciseView()) {
+                        Text("Continue")
+                            .font(.headline)
+                            .foregroundColor(baseBlack)
+                            .padding()
+                            .background(lightPink)
+                            .cornerRadius(10)
+                    }
+                    .simultaneousGesture(TapGesture().onEnded(saveUserData))
                     .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
-            .simultaneousGesture(TapGesture().onEnded(saveUserData))
-            .padding()
-            
-        }
-        .padding()
+                }
+                .padding()
+                .background(Color.gray.opacity(0.1))
+            )
     }
     
     func saveUserData() {

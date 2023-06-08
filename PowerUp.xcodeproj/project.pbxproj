@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9AB6C2642A2C3B5100CF7371 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB6C2632A2C3B5100CF7371 /* ExerciseView.swift */; };
 		9AB6C2662A2C429E00CF7371 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB6C2652A2C429E00CF7371 /* ResultsView.swift */; };
+		9AD454A32A31D4E60045AB71 /* OldProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD454A22A31D4E60045AB71 /* OldProfileView.swift */; };
 		A15C93DE2A17752F004CBD37 /* HealthStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C93DD2A17752F004CBD37 /* HealthStatsView.swift */; };
 		A16C6DBD2A17707000974130 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C6DBC2A17707000974130 /* WelcomeView.swift */; };
 		A1D2D8662A1785FB000BE334 /* DietView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D2D8652A1785FB000BE334 /* DietView.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		9AB6C2632A2C3B5100CF7371 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 		9AB6C2652A2C429E00CF7371 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		9AD454A22A31D4E60045AB71 /* OldProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldProfileView.swift; sourceTree = "<group>"; };
 		A15C93DD2A17752F004CBD37 /* HealthStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStatsView.swift; sourceTree = "<group>"; };
 		A16C6DBC2A17707000974130 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A1D2D8652A1785FB000BE334 /* DietView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietView.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		A15C93E02A177539004CBD37 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9AD454A22A31D4E60045AB71 /* OldProfileView.swift */,
 				A1E85B152A0360ED006C5719 /* ProfileView.swift */,
 				A16C6DBC2A17707000974130 /* WelcomeView.swift */,
 				A15C93DD2A17752F004CBD37 /* HealthStatsView.swift */,
@@ -166,6 +169,7 @@
 			files = (
 				9AB6C2642A2C3B5100CF7371 /* ExerciseView.swift in Sources */,
 				A15C93DE2A17752F004CBD37 /* HealthStatsView.swift in Sources */,
+				9AD454A32A31D4E60045AB71 /* OldProfileView.swift in Sources */,
 				A1E85B162A0360ED006C5719 /* ProfileView.swift in Sources */,
 				A16C6DBD2A17707000974130 /* WelcomeView.swift in Sources */,
 				9AB6C2662A2C429E00CF7371 /* ResultsView.swift in Sources */,
