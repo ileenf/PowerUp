@@ -3,9 +3,10 @@ import SwiftUI
 struct DietView: View {
     @State private var eatOutFrequency = ""
     @State private var veggieFrequency = ""
-    @State private var selectedOption = 0
+    @State private var foodCategory = 0
     let options = ["Protein", "Carbs", "Fat", "Fiber"]
     @State private var category = ""
+    @State private var isButtonPressed = false
     
     var body: some View {
         VStack(spacing: 20) {
@@ -26,18 +27,24 @@ struct DietView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("What category of food do you want to eat more of?")
                     .font(.headline)
-                Picker("Select an option", selection: $selectedOption) {
+                Picker("Select an option", selection: $foodCategory) {
                     ForEach(0..<options.count) { index in
                         Text(options[index])
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                .onChange(of: selectedOption) { newValue in
+                .onChange(of: foodCategory) { newValue in
                     category = options[newValue]
                 }
             }
             
             Spacer()
+
+            Button(action: {
+                            saveUserData()
+                        }) {
+                            Text("Save")
+                        }
             
             NavigationLink(destination: ExerciseView()) {
                 Text("Continue")
@@ -47,8 +54,20 @@ struct DietView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-            .simultaneousGesture(TapGesture().onEnded(saveUserData))
+//            .simultaneousGesture(TapGesture().onEnded(saveUserData))
             .padding()
+            
+//            NavigationLink(
+//                            destination: ExerciseView(),
+////                            isActive: $isButtonPressed,
+//                            label: {
+//                                Button(action: {
+//                                    saveUserData()
+//                                }, label: {
+//                                    Text("Continueee")
+//                                })
+//                            }
+//                        )
             
         }
         .padding()
@@ -58,6 +77,8 @@ struct DietView: View {
         // saves data on local storage
         UserDefaults.standard.set(eatOutFrequency, forKey: "eatOutFrequency")
         UserDefaults.standard.set(veggieFrequency, forKey: "veggieFrequency")
-        UserDefaults.standard.set(selectedOption, forKey: "selectedOption")
+        UserDefaults.standard.set(options[foodCategory], forKey: "foodCategory")
+        print("Saved data from DietView")
+        isButtonPressed = true;
     }
 }

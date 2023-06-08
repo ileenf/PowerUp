@@ -9,6 +9,14 @@ import SwiftUI
 
 struct ResultsView: View {
     let firstName: String = UserDefaults.standard.string(forKey: "firstName")!
+    let eatOutFrequency: String = UserDefaults.standard.string(forKey: "eatOutFrequency")!
+    let veggieFrequency: String = UserDefaults.standard.string(forKey: "veggieFrequency")!
+    let foodCategory: String = UserDefaults.standard.string(forKey: "foodCategory")!
+    let workoutFrequency: String = UserDefaults.standard.string(forKey: "workoutFrequency") ?? "No workout found"
+    let bodyPart: String = UserDefaults.standard.string(forKey: "selectedPartOption") ?? "No activity part selected"
+    let activityLevel: String = UserDefaults.standard.string(forKey: "selectedTypeOption") ?? "no body part"
+    
+    
     
     var body: some View {
         NavigationView {
@@ -17,6 +25,21 @@ struct ResultsView: View {
                     .font(.title)
                     .padding()
                     .onAppear(perform: requestData)
+                
+                Text("eatOutFrequency: \(eatOutFrequency)")
+                    .padding()
+                Text("veggieFrequency: \(veggieFrequency)")
+                    .padding()
+                Text("foodCategory: \(foodCategory)")
+                    .padding()
+                Text("workoutFrequency: \(workoutFrequency)")
+                    .padding()
+                Text("activityLevel: \(activityLevel)")
+                    .padding()
+                Text("bodyPart: \(bodyPart)")
+                    .padding()
+                
+                
 
 //                NavigationLink(destination: ProfileView()) {
 //                    Text("Continue")
@@ -36,10 +59,12 @@ struct ResultsView: View {
         }
     }
     
+    private func requestScoreData() {
+        
+    }
+    
     private func requestData(){
-//        let firstName: String = UserDefaults.standard.string(forKey: "firstName")!
-//        print("NAME:")
-//        print(firstName)
+        
         let category = "calories"
         let minVal = "100"
         let maxVal = "300"
