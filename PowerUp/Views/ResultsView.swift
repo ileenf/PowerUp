@@ -18,7 +18,7 @@ struct ResultsView: View {
                     .padding()
                     .onAppear(perform: requestData)
 
-                NavigationLink(destination: HealthStatsView()) {
+                NavigationLink(destination: ProfileView()) {
                     Text("Continue")
                         .font(.headline)
                         .foregroundColor(.white)
@@ -49,9 +49,9 @@ struct ResultsView: View {
                 }
 
             if let data = data {
-                if let responseString = String(data: data, encoding: .utf8) {
-                    print("Response: \(responseString)")
-                }
+//                if let responseString = String(data: data, encoding: .utf8) {
+//                    print("Response: \(responseString)")
+//                }
                 do {
                     if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
                         for json in jsonArray {
@@ -78,4 +78,3 @@ struct ResultsView: View {
 
     }
 }
-
