@@ -21,6 +21,8 @@ struct ResultsView: View {
     @State private var dietScore: Int = 0
     @State private var exerciseScore: Int = 0
     @State private var sleepScore: Int = 0
+    @State private var recommendedExercises: [String] = []
+    @State private var recommendedFoods: [String] = []
 
     var body: some View {
         NavigationView {
@@ -28,14 +30,27 @@ struct ResultsView: View {
                 Text("The results are in...")
                     .font(.title)
                     .padding()
-                    .onAppear(perform: requestAllScoreData)
+                    .onAppear {
+                        requestExerciseRecommendationData()
+                        requestAllScoreData()
+                        requestFoodRecommendationData()
+                        
+                    }
 
                 Text("Overall Score: \(self.overallScore)/1000")
                     .padding()
                 Text("Diet Score: \(self.dietScore)%")
                     .padding()
+                Text("Foods high in \(self.foodCategory)")
+                ForEach(recommendedFoods.prefix(5), id: \.self) { food in
+                    Text("Food: \(food)")
+                }
                 Text("Exercise Score: \(self.exerciseScore)%")
                     .padding()
+                Text("\(self.bodyPart) exercises")
+                ForEach(recommendedExercises.prefix(5), id: \.self) { exercise in
+                    Text("Exercise: \(exercise)")
+                }
                 Text("Sleep Score: \(self.sleepScore)%")
                     .padding()
                 Text(firstName)
@@ -149,38 +164,112 @@ struct ResultsView: View {
         task.resume()
         
     }
-    private func requestData(){
+    private func requestExerciseRecommendationData(){
+        print("GETTING EXERCISE RECS")
+        let exerciseType = bodyPart.lowercased()
 
-        let category = "calories"
-        let minVal = "100"
-        let maxVal = "300"
-        let urlString = "https://power-up-backend.vercel.app/api/foods/\(category)?min=\(minVal)&max=\(maxVal)"
-        let url = URL(string: urlString)!
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+
+        // Create the base URL
+        var urlComponents = URLComponents(string: "https://power-up-backend.vercel.app/api/exercise/\(exerciseType)")
+        
+        print("EXERCISE URL: \(urlComponents?.url)")
+
+        // Create the URL from the URLComponents
+        guard let url = urlComponents?.url else {
+            // Handle invalid URL
+            return
+        }
+
+        // Create the request
+        let request = URLRequest(url: url)
+
+        // Create the session and task
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                     print("Error: \(error.localizedDescription)")
                     return
                 }
 
             if let data = data {
-//                if let responseString = String(data: data, encoding: .utf8) {
-//                    print("Response: \(responseString)")
-//                }
                 do {
                     if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
                         for json in jsonArray {
-                            if let category = json["Category"] as? String,
-//                               let data = json["Data"] as? [String: Any],
-                               let description = json["Description"] as? String,
-                               let nutrientDataBankNumber = json["Nutrient Data Bank Number"] as? Int {
+                            if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
+                                        for json in jsonArray {
+                                            if let bodyPart = json["BodyPart"] as? String,
+                                               let description = json["Desc"] as? String,
+                                               let equipment = json["Equipment"] as? String,
+                                               let title = json["Title"] as? String {
+                                                // Use the extracted values here
+                                                print("Body Part: \(bodyPart)")
+                                                print("Description: \(description)")
+                                                print("Equipment: \(equipment)")
+                                                print("Title: \(title)")
+                                                DispatchQueue.main.async {
+                                                    recommendedExercises.append(title)
+                                                }
+                                                print()
+                                            }
+                                        }
+                                    }
+                        }
+                    }
+                } catch {
+                    print("Error parsing JSON: \(error)")
+                }
+            }
+        }
+        task.resume()
 
-                                // Use the extracted values here
-                                print("Category: \(category)")
-//                                print("Data: \(data)")
-                                print("Description: \(description)")
-                                print("Nutrient Data Bank Number: \(nutrientDataBankNumber)")
-                                print()
-                            }
+    }
+    
+    private func requestFoodRecommendationData(){
+        print("GETTING FOOD RECS")
+        let foodType = foodCategory.lowercased()
+
+        // Create the base URL
+        var urlComponents = URLComponents(string: "https://power-up-backend.vercel.app/api/foods/\(foodType)")
+        
+        // Add the query items (URL parameters)
+        urlComponents?.queryItems = [
+            URLQueryItem(name: "min", value: "50"),
+            URLQueryItem(name: "max", value: "100"),
+        ]
+
+        // Create the URL from the URLComponents
+        guard let url = urlComponents?.url else {
+            // Handle invalid URL
+            return
+        }
+
+        // Create the request
+        let request = URLRequest(url: url)
+
+        // Create the session and task
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                    print("Error: \(error.localizedDescription)")
+                    return
+                }
+
+            if let data = data {
+                do {
+                    if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
+                        for json in jsonArray {
+                            if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
+                                        for json in jsonArray {
+                                            if let category = json["Category"] as? String,
+                                               let description = json["Description"] as? String {
+                                                // Use the extracted values here
+                                                print("Category: \(category)")
+                                                print("Description: \(description)")
+                                                DispatchQueue.main.async {
+                                                    recommendedFoods.append(description)
+                                                }
+                                                print()
+                                            }
+                                        }
+                                    }
                         }
                     }
                 } catch {
