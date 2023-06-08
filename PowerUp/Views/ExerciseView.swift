@@ -3,7 +3,7 @@ import SwiftUI
 struct ExerciseView: View {
     @State private var workoutFrequency = ""
     @State private var selectedTypeOption = 0
-    let workoutTypeOptions = ["Active", "Casual", "Leisure"]
+    let workoutTypeOptions = ["Leisure", "Casual", "Active"]
     @State private var workoutType = ""
     
     @State private var selectedPartOption = 0
