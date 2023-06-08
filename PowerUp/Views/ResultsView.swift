@@ -18,14 +18,14 @@ struct ResultsView: View {
                     .padding()
                     .onAppear(perform: requestData)
 
-                NavigationLink(destination: ProfileView()) {
-                    Text("Continue")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                }
+//                NavigationLink(destination: ProfileView()) {
+//                    Text("Continue")
+//                        .font(.headline)
+//                        .foregroundColor(.white)
+//                        .padding()
+//                        .background(Color.blue)
+//                        .cornerRadius(10)
+//                }
                 .padding()
                 
                 
@@ -37,6 +37,9 @@ struct ResultsView: View {
     }
     
     private func requestData(){
+//        let firstName: String = UserDefaults.standard.string(forKey: "firstName")!
+//        print("NAME:")
+//        print(firstName)
         let category = "calories"
         let minVal = "100"
         let maxVal = "300"
