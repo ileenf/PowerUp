@@ -11,8 +11,6 @@ struct ExerciseView: View {
     @State private var bodyPartType = ""
     
     let eatOutFrequency: String = UserDefaults.standard.string(forKey: "eatOutFrequency") ?? "no value"
-
-    
     
     var body: some View {
         VStack(spacing: 20) {
@@ -53,12 +51,6 @@ struct ExerciseView: View {
             }
             Spacer()
             
-            Button(action: {
-                            saveUserData()
-                        }) {
-                            Text("Save")
-                        }
-            
             NavigationLink(destination: ResultsView()) {
                 Text("Continue")
                     .font(.headline)
@@ -67,7 +59,7 @@ struct ExerciseView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-//            .simultaneousGesture(TapGesture().onEnded(saveUserData))
+            .simultaneousGesture(TapGesture().onEnded(saveUserData))
             .padding()
             
         }
