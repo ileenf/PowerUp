@@ -14,9 +14,11 @@ struct WelcomeView: View {
                 Text("Welcome power ranger!!!")
                     .font(.title)
                     .padding()
-
-                NavigationLink(destination: HealthStatsView()) {
-                    Text("Continue")
+                
+                Image("rangers").resizable().scaledToFit()
+                
+                NavigationLink(destination: ProfileView()) {
+                    Text("Let's get started!")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
