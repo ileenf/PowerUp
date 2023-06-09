@@ -39,12 +39,6 @@ struct DietView: View {
             }
             
             Spacer()
-
-            Button(action: {
-                            saveUserData()
-                        }) {
-                            Text("Save")
-                        }
             
             NavigationLink(destination: ExerciseView()) {
                 Text("Continue")
@@ -54,20 +48,8 @@ struct DietView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-//            .simultaneousGesture(TapGesture().onEnded(saveUserData))
+            .simultaneousGesture(TapGesture().onEnded(saveUserData))
             .padding()
-            
-//            NavigationLink(
-//                            destination: ExerciseView(),
-////                            isActive: $isButtonPressed,
-//                            label: {
-//                                Button(action: {
-//                                    saveUserData()
-//                                }, label: {
-//                                    Text("Continueee")
-//                                })
-//                            }
-//                        )
             
         }
         .padding()

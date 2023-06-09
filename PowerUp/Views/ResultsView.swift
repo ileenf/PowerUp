@@ -1,23 +1,14 @@
-//
-//  WelcomeView.swift
-//  PowerUp
-//
-//  Created by Ileen F on 5/19/23.
-//
-
 import SwiftUI
 
 struct ResultsView: View {
-    let firstName: String = UserDefaults.standard.string(forKey: "firstName")!
-    let eatOutFrequency: String = UserDefaults.standard.string(forKey: "eatOutFrequency")!
-    let veggieFrequency: String = UserDefaults.standard.string(forKey: "veggieFrequency")!
-    let foodCategory: String = UserDefaults.standard.string(forKey: "foodCategory")!
-    let workoutFrequency: String = UserDefaults.standard.string(forKey: "workoutFrequency") ?? "No workout found"
-    let bodyPart: String = UserDefaults.standard.string(forKey: "selectedPartOption") ?? "No activity part selected"
-    let activityLevel: String = UserDefaults.standard.string(forKey: "selectedTypeOption") ?? "no body part"
-    
-    
-    
+    @State private var firstName: String = ""
+    @State private var eatOutFrequency: String = ""
+    @State private var veggieFrequency: String = ""
+    @State private var foodCategory: String = ""
+    @State private var workoutFrequency: String = ""
+    @State private var bodyPart: String = ""
+    @State private var activityLevel: String = ""
+
     var body: some View {
         NavigationView {
             VStack {
@@ -25,7 +16,7 @@ struct ResultsView: View {
                     .font(.title)
                     .padding()
                     .onAppear(perform: requestData)
-                
+
                 Text("eatOutFrequency: \(eatOutFrequency)")
                     .padding()
                 Text("veggieFrequency: \(veggieFrequency)")
@@ -38,33 +29,26 @@ struct ResultsView: View {
                     .padding()
                 Text("bodyPart: \(bodyPart)")
                     .padding()
-                
-                
-
-//                NavigationLink(destination: ProfileView()) {
-//                    Text("Continue")
-//                        .font(.headline)
-//                        .foregroundColor(.white)
-//                        .padding()
-//                        .background(Color.blue)
-//                        .cornerRadius(10)
-//                }
-                .padding()
-                
-                
                 Text(firstName)
                     .font(.title)
             }
             .navigationBarTitle("PowerUp")
         }
+        .onAppear(perform: retrieveUserData)
     }
-    
-    private func requestScoreData() {
-        
+
+    private func retrieveUserData() {
+        firstName = UserDefaults.standard.string(forKey: "firstName") ?? ""
+        eatOutFrequency = UserDefaults.standard.string(forKey: "eatOutFrequency") ?? ""
+        veggieFrequency = UserDefaults.standard.string(forKey: "veggieFrequency") ?? ""
+        foodCategory = UserDefaults.standard.string(forKey: "foodCategory") ?? ""
+        workoutFrequency = UserDefaults.standard.string(forKey: "workoutFrequency") ?? ""
+        bodyPart = UserDefaults.standard.string(forKey: "selectedPartOption") ?? ""
+        activityLevel = UserDefaults.standard.string(forKey: "selectedTypeOption") ?? ""
     }
-    
+
     private func requestData(){
-        
+
         let category = "calories"
         let minVal = "100"
         let maxVal = "300"
@@ -87,7 +71,7 @@ struct ResultsView: View {
 //                               let data = json["Data"] as? [String: Any],
                                let description = json["Description"] as? String,
                                let nutrientDataBankNumber = json["Nutrient Data Bank Number"] as? Int {
-                                
+
                                 // Use the extracted values here
                                 print("Category: \(category)")
 //                                print("Data: \(data)")
