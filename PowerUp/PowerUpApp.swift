@@ -72,5 +72,11 @@ struct PowerUpApp: App {
         UserDefaults.standard.removeObject(forKey: "workoutFrequency")
         UserDefaults.standard.removeObject(forKey: "selectedTypeOption")
         UserDefaults.standard.removeObject(forKey: "selectedPartOption")
+        UserDefaults.standard.removeObject(forKey: "height")
+        UserDefaults.standard.removeObject(forKey: "weight")
+        UserDefaults.standard.removeObject(forKey: "heartRate")
+        UserDefaults.standard.removeObject(forKey: "caloriesBurned")
+        UserDefaults.standard.removeObject(forKey: "stepCount")
+        UserDefaults.standard.removeObject(forKey: "avgSleepDuration")
     }
 }

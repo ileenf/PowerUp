@@ -6,7 +6,6 @@ struct ProfileView: View {
     @State private var firstName = ""
     @State private var lastName = ""
     @State private var selectedSex: HKBiologicalSex = .notSet
-    @State private var age: Int = 0
     // only for initial log in
     @State private var dateOfBirth = Date()
     @State private var stepCount: Int = 0
@@ -103,12 +102,6 @@ struct ProfileView: View {
                 }
                 .background(baseBlack.opacity(0.1)) // Set background color
            )
-//                .background(
-//                    Image("rangers")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fill)
-//                )
-//                .padding()
     }
 
     
@@ -121,6 +114,12 @@ struct ProfileView: View {
         let now = Date()
         let ageComponents = calendar.dateComponents([.year], from: dateOfBirth, to: now)
         UserDefaults.standard.set(ageComponents.year, forKey: "age")
+        UserDefaults.standard.set(height, forKey: "height")
+        UserDefaults.standard.set(weight, forKey: "weight")
+        UserDefaults.standard.set(heartRate, forKey: "heartRate")
+        UserDefaults.standard.set(caloriesBurned, forKey: "caloriesBurned")
+        UserDefaults.standard.set(stepCount, forKey: "stepCount")
+        UserDefaults.standard.set(avgSleepDuration, forKey: "avgSleepDuration")
         print("Saved data from ProfileView")
     }
     
@@ -130,9 +129,9 @@ struct ProfileView: View {
             // Handle case when HealthKit is not available
             return
         }
-
+        
         let healthStore = HKHealthStore()
-
+        
         // Define the types of health data you want to read
         let stepCountType = HKObjectType.quantityType(forIdentifier: .stepCount)
         let heightType = HKObjectType.quantityType(forIdentifier: .height)
@@ -154,10 +153,10 @@ struct ProfileView: View {
                 // Fetch step count data
                 let stepCountQuery = HKSampleQuery(sampleType: stepCountType!, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, results, error) in
                     if let steps = results?.compactMap({ $0 as? HKQuantitySample }) {
-                        let totalSteps = steps.reduce(0, { $0 + $1.quantity.doubleValue(for: HKUnit.count()) })
+                        let totalSteps = steps.reduce(0.0, { $0 + $1.quantity.doubleValue(for: HKUnit.count()) })
                         let numberOfEntries = steps.count
                         let averageStepCount: Double
-                    
+                        
                         if numberOfEntries >= 7 {
                             averageStepCount = totalSteps / 7.0
                         } else {
@@ -179,8 +178,9 @@ struct ProfileView: View {
                 let heightQuery = HKSampleQuery(sampleType: heightType!, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, results, error) in
                     if let heightSample = results?.last as? HKQuantitySample {
                         let heightInCM = heightSample.quantity.doubleValue(for: HKUnit.meter()) * 100
-                            self.height = heightInCM
-                            print("Height: \(height) cm")
+                        self.height = heightInCM
+                        print("Height: \(height) cm")
+                        // Use the height data in your app's logic
                     } else if let error = error {
                         print("Error retrieving height data: \(error.localizedDescription)")
                     }
@@ -204,65 +204,66 @@ struct ProfileView: View {
                 
                 // Fetch calories burned data
                 let caloriesQuery = HKSampleQuery(sampleType: caloriesBurnedType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
-                        if let samples = samples as? [HKQuantitySample] {
-                            let numberOfEntries = samples.count
-                            let totalCaloriesBurned = samples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.kilocalorie()) }
-                            let averageCaloriesBurned: Double
-                            
-                            if numberOfEntries < 7 {
-                                averageCaloriesBurned = totalCaloriesBurned / Double(numberOfEntries)
-                            } else {
-                                averageCaloriesBurned = totalCaloriesBurned / 7.0
-                            }
-                            
-                            DispatchQueue.main.async {
-                                self.caloriesBurned = Int(averageCaloriesBurned)
-                                print("Number of Valid Entries: \(numberOfEntries)")
-                                print("Average Calories Burned per Day (Past 7 Days): \(self.caloriesBurned)")
-                            }
-                        } else if let error = error {
-                            print("Error retrieving calories burned data: \(error.localizedDescription)")
+                    if let samples = samples as? [HKQuantitySample] {
+                        let numberOfEntries = samples.count
+                        let totalCaloriesBurned = samples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.kilocalorie()) }
+                        let averageCaloriesBurned: Double
+                        
+                        if numberOfEntries < 7 {
+                            averageCaloriesBurned = totalCaloriesBurned / Double(numberOfEntries)
+                        } else {
+                            averageCaloriesBurned = totalCaloriesBurned / 7.0
                         }
+                        
+                        DispatchQueue.main.async {
+                            self.caloriesBurned = Int(averageCaloriesBurned)
+                            print("Number of Valid Entries: \(numberOfEntries)")
+                            print("Average Calories Burned per Day (Past 7 Days): \(self.caloriesBurned)")
+                        }
+                    } else if let error = error {
+                        print("Error retrieving calories burned data: \(error.localizedDescription)")
                     }
-                    
-                    healthStore.execute(caloriesQuery)
+                }
+                
+                healthStore.execute(caloriesQuery)
                 
                 // Fetch weight data
                 let weightQuery = HKSampleQuery(sampleType: weightType, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, results, error) in
                     if let weightSample = results?.last as? HKQuantitySample {
                         let weightInKg = weightSample.quantity.doubleValue(for: HKUnit.pound()) * 0.45359237
-                            self.weight = Int(weightInKg)
-                            print("Current Weight: \(weight) lb")
+                        self.weight = Int(weightInKg)
+                        print("Current Weight: \(weight) lb")
+                        // Use the weight data in your app's logic
                     } else if let error = error {
                         print("Error retrieving weight data: \(error.localizedDescription)")
                     }
                 }
                 healthStore.execute(weightQuery)
-
+                
                 // Fetch heart rate data
                 let heartRateQuery = HKSampleQuery(sampleType: heartRateType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, results, error) in
-                        if let heartRateSamples = results?.compactMap({ $0 as? HKQuantitySample }) {
-                            let totalHeartRate = heartRateSamples.reduce(0.0, { $0 + $1.quantity.doubleValue(for: HKUnit(from: "count/min")) })
-                            let numberOfEntries = heartRateSamples.count
-                            let averageHeartRate: Double
-                            
-                            if numberOfEntries >= 7 {
-                                averageHeartRate = totalHeartRate / 7.0
-                            } else {
-                                averageHeartRate = totalHeartRate / Double(numberOfEntries)
-                            }
-                            
-                            DispatchQueue.main.async {
-                                self.heartRate = Int(averageHeartRate)
-                                print("Number of Heart Rate Entries: \(numberOfEntries)")
-                                print("Average Heart Rate (Past 7 Days): \(self.heartRate) bpm")
-                            }
-                        } else if let error = error {
-                            print("Error retrieving heart rate data: \(error.localizedDescription)")
+                    if let heartRateSamples = results?.compactMap({ $0 as? HKQuantitySample }) {
+                        let totalHeartRate = heartRateSamples.reduce(0.0, { $0 + $1.quantity.doubleValue(for: HKUnit(from: "count/min")) })
+                        let numberOfEntries = heartRateSamples.count
+                        let averageHeartRate: Double
+                        
+                        if numberOfEntries >= 7 {
+                            averageHeartRate = totalHeartRate / 7.0
+                        } else {
+                            averageHeartRate = totalHeartRate / Double(numberOfEntries)
                         }
+                        
+                        DispatchQueue.main.async {
+                            self.heartRate = Int(averageHeartRate)
+                            print("Number of Heart Rate Entries: \(numberOfEntries)")
+                            print("Average Heart Rate (Past 7 Days): \(self.heartRate) bpm")
+                        }
+                    } else if let error = error {
+                        print("Error retrieving heart rate data: \(error.localizedDescription)")
                     }
-                    
-                    healthStore.execute(heartRateQuery)
+                }
+                
+                healthStore.execute(heartRateQuery)
             }
         }
     }
