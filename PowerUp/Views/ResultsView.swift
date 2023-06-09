@@ -89,9 +89,6 @@ struct ResultsView: View {
 //                    .foregroundColor(lightWhite)
                 .onAppear(perform: {
                     retrieveUserData()
-                    requestAllScoreData()
-                    requestExerciseRecommendationData()
-                    requestFoodRecommendationData()
                 })
             )
     }
@@ -112,7 +109,6 @@ struct ResultsView: View {
         stepCount = UserDefaults.standard.integer(forKey: "stepCount")
         avgSleepDuration = UserDefaults.standard.integer(forKey: "avgSleepDuration")
         workoutIntensity = activityLevelToIntensity[activityLevel] ?? 0
-        
     }
 
     private func requestAllScoreData() {
@@ -185,7 +181,7 @@ struct ResultsView: View {
                                 print("Overall Score: \(self.overallScore)")
                                 print("Sleep Score: \(self.sleepScore)")
                                 
-                                requestSleepRecommendationData()
+                                getSleepRecommendationData()
                             }
                         }
                     } catch {
@@ -202,12 +198,21 @@ struct ResultsView: View {
         
     }
     
-    private func requestSleepRecommendationData() {
+    private func getSleepRecommendationData() {
         if self.sleepScore > 50 {
             self.recommendedSleep = "You are getting sufficient sleep!"
         } else {
-            self.recommendedSleep = "You are not getting enough sleep."
+            var hoursToSleep = 0.0
+            if (gender == 1) {
+                print("AVG SLEEP DURATION")
+                print(Double(self.avgSleepDuration))
+                hoursToSleep = abs(9.0 - Double(self.avgSleepDuration))
+            } else {
+                hoursToSleep = abs(8.5 - Double(self.avgSleepDuration))
+            }
+            self.recommendedSleep = "You are not getting enough sleep. Sleep \(hoursToSleep) more hours/night"
         }
+        
     }
     
     private func requestExerciseRecommendationData(){
