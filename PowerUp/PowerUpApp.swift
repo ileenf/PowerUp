@@ -33,7 +33,7 @@ struct PowerUpApp: App {
                 }
             }
         }
-    }
+    }   
     
     private func hasAllNonNilData() -> Bool {
         print("in nil check")

@@ -23,6 +23,7 @@ struct ResultsView: View {
     @State private var sleepScore: Int = 0
     @State private var recommendedExercises: [String] = []
     @State private var recommendedFoods: [String] = []
+    @State private var recommendedSleep: String = ""
 
     var body: some View {
         NavigationView {
@@ -31,14 +32,16 @@ struct ResultsView: View {
                     .font(.title)
                     .padding()
                     .onAppear {
-                        requestExerciseRecommendationData()
                         requestAllScoreData()
                         requestFoodRecommendationData()
-                        
+                        requestExerciseRecommendationData()
                     }
-
+                
                 Text("Overall Score: \(self.overallScore)/1000")
                     .padding()
+                Text("Sleep Score: \(self.sleepScore)%")
+                    .padding()
+                Text("\(self.recommendedSleep)")
                 Text("Diet Score: \(self.dietScore)%")
                     .padding()
                 Text("Foods high in \(self.foodCategory)")
@@ -51,14 +54,15 @@ struct ResultsView: View {
                 ForEach(recommendedExercises.prefix(5), id: \.self) { exercise in
                     Text("Exercise: \(exercise)")
                 }
-                Text("Sleep Score: \(self.sleepScore)%")
-                    .padding()
-                Text(firstName)
-                    .font(.title)
             }
             .navigationBarTitle("PowerUp")
         }
-        .onAppear(perform: retrieveUserData)
+        .onAppear(perform: {
+            retrieveUserData()
+            requestAllScoreData()
+            requestExerciseRecommendationData()
+            requestFoodRecommendationData()
+        })
     }
 
     private func retrieveUserData() {
@@ -149,6 +153,8 @@ struct ResultsView: View {
                                 print("Exercise Score: \(self.exerciseScore)")
                                 print("Overall Score: \(self.overallScore)")
                                 print("Sleep Score: \(self.sleepScore)")
+                                
+                                requestSleepRecommendationData()
                             }
                         }
                     } catch {
@@ -164,6 +170,15 @@ struct ResultsView: View {
         task.resume()
         
     }
+    
+    private func requestSleepRecommendationData() {
+        if self.sleepScore > 50 {
+            self.recommendedSleep = "You are getting sufficient sleep!"
+        } else {
+            self.recommendedSleep = "You are not getting enough sleep."
+        }
+    }
+    
     private func requestExerciseRecommendationData(){
         print("GETTING EXERCISE RECS")
         let exerciseType = bodyPart.lowercased()
