@@ -38,6 +38,7 @@ struct ResultsView: View {
             .ignoresSafeArea()
             .overlay(
                 VStack(alignment: .leading, spacing: 16) {
+                    
                     Text("The results are in...")
                         .foregroundColor(lightWhite)
                         .font(.title)

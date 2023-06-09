@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct PowerUpApp: App {
     let storedFirstName = UserDefaults.standard.string(forKey: "firstName")
-    let localDataKeys = ["firstName", "lastName", "selectedSex", "age", "eatOutFrequency", "veggieFrequency", "selectedOption", "workoutFrequency", "selectedTypeOption", "selectedPartOption"]
+    let localDataKeys = ["firstName", "lastName", "selectedSex", "age", "eatOutFrequency", "veggieFrequency", "foodCategory", "workoutFrequency", "selectedTypeOption", "selectedPartOption", "height", "weight", "heartRate", "caloriesBurned",  "stepCount", "avgSleepDuration"]
     
     var body: some Scene {
         WindowGroup {
@@ -26,9 +26,9 @@ struct PowerUpApp: App {
             // call this is all data is not nil
             else {
                 // i want to call clearUserdata here, but it wont let me
-                ResultsView().onAppear {
+                WelcomeBackView().onAppear {
                     print("at least one data is null")
-                    printUserData()
+//                    printUserData()
                     clearUserData()
                 }
             }
