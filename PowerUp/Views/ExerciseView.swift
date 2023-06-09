@@ -10,6 +10,10 @@ struct ExerciseView: View {
     let bodyPartOptions = ["Arms", "Cardio", "Core", "Legs", "Flexibility"]
     @State private var bodyPartType = ""
     
+    let eatOutFrequency: String = UserDefaults.standard.string(forKey: "eatOutFrequency") ?? "no value"
+
+    
+    
     var body: some View {
         VStack(spacing: 20) {
             VStack(alignment: .leading, spacing: 10) {
@@ -49,6 +53,12 @@ struct ExerciseView: View {
             }
             Spacer()
             
+            Button(action: {
+                            saveUserData()
+                        }) {
+                            Text("Save")
+                        }
+            
             NavigationLink(destination: ResultsView()) {
                 Text("Continue")
                     .font(.headline)
@@ -57,7 +67,7 @@ struct ExerciseView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-            .simultaneousGesture(TapGesture().onEnded(saveUserData))
+//            .simultaneousGesture(TapGesture().onEnded(saveUserData))
             .padding()
             
         }
@@ -66,10 +76,13 @@ struct ExerciseView: View {
     
     func saveUserData() {
         // saves data on local storage
+        print(eatOutFrequency)
+        print("FRQUENCY")
+        print(workoutFrequency)
         UserDefaults.standard.set(workoutFrequency, forKey: "workoutFrequency")
-        UserDefaults.standard.set(selectedTypeOption, forKey: "selectedTypeOption")
-        UserDefaults.standard.set(selectedPartOption, forKey: "selectedPartOption")
-        
-        print("has finished svaing")
+        UserDefaults.standard.set(workoutTypeOptions[selectedTypeOption], forKey: "selectedTypeOption")
+        UserDefaults.standard.set(bodyPartOptions[selectedPartOption], forKey: "selectedPartOption")
+                
+        print("Saved data from Exercise View")
     }
 }

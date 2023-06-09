@@ -73,6 +73,7 @@ struct ProfileView: View {
         let now = Date()
         let ageComponents = calendar.dateComponents([.year], from: dateOfBirth, to: now)
         UserDefaults.standard.set(ageComponents.year, forKey: "age")
+        print("Saved data from ProfileView")
     }
     
     func getHealthData() {
