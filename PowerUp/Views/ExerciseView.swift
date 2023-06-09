@@ -57,9 +57,19 @@ struct ExerciseView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
+            .simultaneousGesture(TapGesture().onEnded(saveUserData))
             .padding()
             
         }
         .padding()
+    }
+    
+    func saveUserData() {
+        // saves data on local storage
+        UserDefaults.standard.set(workoutFrequency, forKey: "workoutFrequency")
+        UserDefaults.standard.set(selectedTypeOption, forKey: "selectedTypeOption")
+        UserDefaults.standard.set(selectedPartOption, forKey: "selectedPartOption")
+        
+        print("has finished svaing")
     }
 }

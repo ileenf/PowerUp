@@ -29,5 +29,11 @@ struct PowerUpApp: App {
         UserDefaults.standard.removeObject(forKey: "lastName")
         UserDefaults.standard.removeObject(forKey: "selectedSex")
         UserDefaults.standard.removeObject(forKey: "age")
+        UserDefaults.standard.removeObject(forKey: "eatOutFrequency")
+        UserDefaults.standard.removeObject(forKey: "veggieFrequency")
+        UserDefaults.standard.removeObject(forKey: "selectedOption")
+        UserDefaults.standard.removeObject(forKey: "workoutFrequency")
+        UserDefaults.standard.removeObject(forKey: "selectedTypeOption")
+        UserDefaults.standard.removeObject(forKey: "selectedPartOption")
     }
 }
