@@ -30,11 +30,14 @@ struct ResultsView: View {
     let lightPink = Color(rgb: 0xdeaf9d)
     let lightWhite = Color(rgb: 0xf2efed)
     
+    var recommendations = ["Sleep", "Diet", "Exercise"]
+    @State private var selectedRec = 0
+    
     var body: some View {
         baseBlack
             .ignoresSafeArea()
             .overlay(
-                VStack {
+                VStack(alignment: .leading, spacing: 16) {
                     Text("The results are in...")
                         .foregroundColor(lightWhite)
                         .font(.title)
@@ -49,44 +52,65 @@ struct ResultsView: View {
                     Text("Overall Score: \(self.overallScore)/1000")
                         .foregroundColor(lightPink)
                         .font(.title)
-                        .padding()
+                        .padding(.horizontal)
                     
-                    Text("Sleep Score: \(self.sleepScore)%")
-                        .foregroundColor(lightPink)
-                        .font(.headline)
-                        .padding()
-                    
-                    Text("\(self.recommendedSleep)")
-                        .foregroundColor(lightWhite)
-                    
-                    Text("Diet Score: \(self.dietScore)%")
-                        .foregroundColor(lightPink)
-                        .font(.headline)
-                        .padding()
-                    
-                    Text("Foods high in \(self.foodCategory)")
-                    
-                    ForEach(recommendedFoods.prefix(5), id: \.self) { food in
-                        Text("Food: \(food)")
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Sleep Score: \(self.sleepScore)%")
+                            .foregroundColor(lightPink)
+                            .font(.headline)
+                        
+                        Text("\(self.recommendedSleep)")
                             .foregroundColor(lightWhite)
                     }
+                    .padding(.horizontal)
                     
-                    Text("Exercise Score: \(self.exerciseScore)%")
-                        .foregroundColor(lightPink)
-                        .font(.headline)
-                        .padding()
-                    
-                    Text("\(self.bodyPart) exercises")
-                        .foregroundColor(lightWhite)
-                        .font(.headline)
-    
-                    ForEach(recommendedExercises.prefix(5), id: \.self) { exercise in
-                        Text("Exercise: \(exercise)")
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Diet Score: \(self.dietScore)%")
+                            .foregroundColor(lightPink)
+                            .font(.headline)
+                        
+                        Text("Foods high in \(self.foodCategory)")
                             .foregroundColor(lightWhite)
+                            .bold()
+                        
+//                        ForEach(recommendedFoods.prefix(5), id: \.self) { food in
+//                            Text("Food: \(food)")
+//                                .foregroundColor(lightWhite)
+//                        }
+                        ForEach(Array(recommendedFoods.prefix(5)).enumerated().map { $0 }, id: \.element) { index, food in
+                            Text("Food \(index + 1): \(food)")
+                                .foregroundColor(lightWhite)
+                        }
                     }
+                    .padding(.horizontal)
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Exercise Score: \(self.exerciseScore)%")
+                            .foregroundColor(lightPink)
+                            .font(.headline)
+                        
+                        Text("\(self.bodyPart) exercises")
+                            .foregroundColor(lightWhite)
+                            .font(.headline)
+                        
+//                        ForEach(recommendedExercises.prefix(5), id: \.self) { exercise in
+//                            Text("Exercise: \(exercise)")
+//                                .foregroundColor(lightWhite)
+//                        }
+                        ForEach(Array(recommendedExercises.prefix(5)).enumerated().map { $0 }, id: \.element) { index, exercise in
+                            Text("Exercise \(index + 1): \(exercise)")
+                                .foregroundColor(lightWhite)
+                        }
+
+
+                    }
+                    .padding(.horizontal)
+                    
+                    Spacer()
                 }
 //                .navigationBarTitle("PowerUp")
-//                    .foregroundColor(lightWhite)
+//                .foregroundColor(lightWhite)
+//                .padding()
                 .onAppear(perform: {
                     retrieveUserData()
                 })
