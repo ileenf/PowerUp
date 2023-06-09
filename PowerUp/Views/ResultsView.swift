@@ -24,45 +24,76 @@ struct ResultsView: View {
     @State private var recommendedExercises: [String] = []
     @State private var recommendedFoods: [String] = []
     @State private var recommendedSleep: String = ""
-
+    
+    // color for UI
+    let baseBlack = Color(rgb: 0x1c1b1d)
+    let lightPink = Color(rgb: 0xdeaf9d)
+    let lightWhite = Color(rgb: 0xf2efed)
+    
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("The results are in...")
-                    .font(.title)
-                    .padding()
-                    .onAppear {
-                        requestAllScoreData()
-                        requestFoodRecommendationData()
-                        requestExerciseRecommendationData()
+        baseBlack
+            .ignoresSafeArea()
+            .overlay(
+                VStack {
+                    Text("The results are in...")
+                        .foregroundColor(lightWhite)
+                        .font(.title)
+                        .bold()
+                        .padding()
+                        .onAppear {
+                            requestAllScoreData()
+                            requestFoodRecommendationData()
+                            requestExerciseRecommendationData()
+                        }
+                    
+                    Text("Overall Score: \(self.overallScore)/1000")
+                        .foregroundColor(lightPink)
+                        .font(.title)
+                        .padding()
+                    
+                    Text("Sleep Score: \(self.sleepScore)%")
+                        .foregroundColor(lightPink)
+                        .font(.headline)
+                        .padding()
+                    
+                    Text("\(self.recommendedSleep)")
+                        .foregroundColor(lightWhite)
+                    
+                    Text("Diet Score: \(self.dietScore)%")
+                        .foregroundColor(lightPink)
+                        .font(.headline)
+                        .padding()
+                    
+                    Text("Foods high in \(self.foodCategory)")
+                    
+                    ForEach(recommendedFoods.prefix(5), id: \.self) { food in
+                        Text("Food: \(food)")
+                            .foregroundColor(lightWhite)
                     }
-                
-                Text("Overall Score: \(self.overallScore)/1000")
-                    .padding()
-                Text("Sleep Score: \(self.sleepScore)%")
-                    .padding()
-                Text("\(self.recommendedSleep)")
-                Text("Diet Score: \(self.dietScore)%")
-                    .padding()
-                Text("Foods high in \(self.foodCategory)")
-                ForEach(recommendedFoods.prefix(5), id: \.self) { food in
-                    Text("Food: \(food)")
+                    
+                    Text("Exercise Score: \(self.exerciseScore)%")
+                        .foregroundColor(lightPink)
+                        .font(.headline)
+                        .padding()
+                    
+                    Text("\(self.bodyPart) exercises")
+                        .foregroundColor(lightWhite)
+                        .font(.headline)
+    
+                    ForEach(recommendedExercises.prefix(5), id: \.self) { exercise in
+                        Text("Exercise: \(exercise)")
+                            .foregroundColor(lightWhite)
+                    }
                 }
-                Text("Exercise Score: \(self.exerciseScore)%")
-                    .padding()
-                Text("\(self.bodyPart) exercises")
-                ForEach(recommendedExercises.prefix(5), id: \.self) { exercise in
-                    Text("Exercise: \(exercise)")
-                }
-            }
-            .navigationBarTitle("PowerUp")
-        }
-        .onAppear(perform: {
-            retrieveUserData()
-            requestAllScoreData()
-            requestExerciseRecommendationData()
-            requestFoodRecommendationData()
-        })
+//                .navigationBarTitle("PowerUp")
+//                    .foregroundColor(lightWhite)
+                .onAppear(perform: {
+                    retrieveUserData()
+                    requestAllScoreData()
+                    requestExerciseRecommendationData()
+                    requestFoodRecommendationData()
+                })
+            )
     }
 
     private func retrieveUserData() {
