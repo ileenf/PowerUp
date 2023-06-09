@@ -15,11 +15,8 @@ struct WelcomeBackView: View {
                 .overlay(
                     VStack {
                         Text("Welcome back \(firstName)!")
-        //                        .textFieldStyle(PlainTextFieldStyle())
-        //                        .padding()
                             .font(.title)
                             .foregroundColor(baseBlack)
-        //                        .accentColor(lightWhite)
                             .background(lightWhite)
                             .cornerRadius(8)
                             .shadow(radius: 4)
@@ -27,6 +24,15 @@ struct WelcomeBackView: View {
                         
                         NavigationLink(destination: ResultsView()) {
                             Text("Continue")
+                                .font(.headline)
+                                .foregroundColor(baseBlack)
+                                .padding()
+                                .background(lightPink)
+                                .cornerRadius(10)
+                        }
+                        
+                        NavigationLink(destination: DietView()) {
+                            Text("Edit Info")
                                 .font(.headline)
                                 .foregroundColor(baseBlack)
                                 .padding()

@@ -26,6 +26,7 @@ struct ProfileView: View {
                 VStack {
                     TextField("First Name", text: $firstName)
                         .textFieldStyle(PlainTextFieldStyle())
+                        .frame(width: 300, height: 20)
                         .padding()
                         .font(.headline)
                         .foregroundColor(baseBlack)
@@ -36,6 +37,7 @@ struct ProfileView: View {
                     
                     TextField("Last Name", text: $lastName)
                         .textFieldStyle(PlainTextFieldStyle())
+                        .frame(width: 300, height: 20)
                         .padding()
                         .font(.headline)
                         .foregroundColor(baseBlack)
@@ -47,7 +49,7 @@ struct ProfileView: View {
                     Spacer()
                     
                     DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: .date)
-                        .frame(width: 400, height: 40)
+                        .frame(width: 360, height: 40)
                         .background(lightPink)
                         .cornerRadius(8)
                         .padding(.horizontal, 20)
@@ -62,7 +64,7 @@ struct ProfileView: View {
                             .font(.headline)
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    .frame(width: 400, height: 40)
+                    .frame(width: 360, height: 40)
                     .background(lightWhite)
                     .padding()
                     

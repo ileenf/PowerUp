@@ -29,7 +29,7 @@ struct PowerUpApp: App {
                 WelcomeBackView().onAppear {
                     print("at least one data is null")
 //                    printUserData()
-                    clearUserData()
+//                    clearUserData()
                 }
             }
         }
