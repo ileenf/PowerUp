@@ -206,6 +206,8 @@ struct ResultsView: View {
                                 print("Overall Score: \(self.overallScore)")
                                 print("Sleep Score: \(self.sleepScore)")
                                 
+                                UserDefaults.standard.set(self.overallScore, forKey: "overallScore")
+                                
                                 getSleepRecommendationData()
                             }
                         }

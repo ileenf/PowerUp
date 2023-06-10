@@ -29,7 +29,7 @@ struct PowerUpApp: App {
                 WelcomeBackView().onAppear {
                     print("at least one data is null")
 //                    printUserData()
-//                    clearUserData()
+//                    clearUserData() // debugging purposes
                 }
             }
         }
@@ -78,5 +78,6 @@ struct PowerUpApp: App {
         UserDefaults.standard.removeObject(forKey: "caloriesBurned")
         UserDefaults.standard.removeObject(forKey: "stepCount")
         UserDefaults.standard.removeObject(forKey: "avgSleepDuration")
+        UserDefaults.standard.removeObject(forKey: "overallScore")
     }
 }

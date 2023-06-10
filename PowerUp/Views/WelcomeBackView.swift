@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WelcomeBackView: View {
     @State private var firstName: String = ""
+    @State private var overallScore: Int = 0
     
     // color for UI
     let baseBlack = Color(rgb: 0x1c1b1d)
@@ -15,16 +16,25 @@ struct WelcomeBackView: View {
                 .overlay(
                     VStack {
                         Text("Welcome back \(firstName)!")
-                            .font(.title)
-                            .foregroundColor(baseBlack)
-                            .background(lightWhite)
-                            .cornerRadius(8)
-                            .shadow(radius: 4)
+                            .font(.custom("Verdana", size: 50))
+                            .foregroundColor(lightWhite)
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .multilineTextAlignment(.center)
 
+                        Spacer()
+                        
+                        Text("Your current overall score is \(overallScore) / 1000")
+                            .font(.custom("Verdana", size: 30))
+                            .foregroundColor(lightPink)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .multilineTextAlignment(.center)
+                            
+                        Spacer()
                         
                         NavigationLink(destination: ResultsView()) {
-                            Text("Continue")
-                                .font(.headline)
+                            Text("Recommendations")
+                                .font(.custom("Verdana", size: 20))
                                 .foregroundColor(baseBlack)
                                 .padding()
                                 .background(lightPink)
@@ -33,7 +43,7 @@ struct WelcomeBackView: View {
                         
                         NavigationLink(destination: DietView()) {
                             Text("Edit Info")
-                                .font(.headline)
+                                .font(.custom("Verdana", size: 20))
                                 .foregroundColor(baseBlack)
                                 .padding()
                                 .background(lightPink)
@@ -49,5 +59,6 @@ struct WelcomeBackView: View {
     }
     private func retrieveUserData() {
         firstName = UserDefaults.standard.string(forKey: "firstName") ?? ""
+        overallScore = UserDefaults.standard.integer(forKey: "overallScore") ?? 0
     }
 }
